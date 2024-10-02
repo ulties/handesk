@@ -37,6 +37,7 @@ class TeamsController extends Controller
         return view('teams.edit', ['team' => $team]);
     }
 
+   
     public function update(Team $team)
     {
         $team->update([
@@ -47,5 +48,13 @@ class TeamsController extends Controller
         ]);
 
         return redirect()->route('teams.index');
+    }
+
+    public function destroy(Team $team)
+    {
+        
+     $Thisteam=Team::where('id',$team['id']);
+     $Thisteam->delete();
+     return redirect()->route('teams.index');
     }
 }

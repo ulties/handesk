@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @section('content')
     <div class="description">
@@ -45,6 +46,23 @@
                 @can('administrate', $team)
                     <th> <a href="{{route('teams.edit',$team)}}"> @icon(pencil) </a></th>
                 @endcan
+                @can('administrate', $team)
+                <th>
+                    <a href="{{ route('teams.edit', $team) }}">@icon(pencil)</a>
+                </th>
+            @endcan
+            @can('administrate', $team)
+                <th>
+                    <form action="{{ route('teams.destroy', $team) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this team?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" style="color:red; border:none; background:none;">
+                            @icon(trash)
+                        </button>
+                    </form>
+                </th>
+            @endcan
+            
             </tr>
         @endforeach
         </tbody>
